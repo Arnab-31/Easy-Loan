@@ -10,7 +10,7 @@ class AllLoans extends Component {
 
     componentDidMount() {
 
-        fetch('http://localhost:3000/loan',{
+        fetch('https://easyloan-api-by-arnab.herokuapp.com/loan',{
             method: 'GET',
             headers: {
                 accept: 'application/json',

@@ -1,9 +1,8 @@
 import { Switch, Route } from 'react-router-dom';
 
 import Layout from './components/Layout/Layout';
-import UserProfile from './components/Profile/UserProfile';
+import LoanApplication from './components/LoanApplication/LoanApplication';
 import AuthPage from './pages/AuthPage';
-import HomePage from './pages/HomePage';
 import LoansPage from './pages/LoansPage';
 
 function App() {
@@ -11,13 +10,10 @@ function App() {
     <Layout>
       <Switch>
         <Route path='/' exact>
-          <HomePage />
-        </Route>
-        <Route path='/auth'>
           <AuthPage />
         </Route>
-        <Route path='/profile'>
-          <UserProfile />
+        <Route path='/loanApply'>
+          <LoanApplication />
         </Route>
         <Route path='/loans'>
           <LoansPage />

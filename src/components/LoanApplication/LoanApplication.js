@@ -1,11 +1,11 @@
-import ProfileForm from './ProfileForm';
-import classes from './UserProfile.module.css';
+import LoanForm from './LoanForm';
+import classes from './LoanApplication.module.css';
 
 const UserProfile = () => {
   return (
     <section className={classes.profile}>
       <h1>Loan Application</h1>
-      <ProfileForm />
+      <LoanForm />
     </section>
   );
 };

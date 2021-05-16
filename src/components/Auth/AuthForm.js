@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classes from './AuthForm.module.css';
+import {withRouter} from 'react-router-dom'
 
 
 class AuthForm extends Component{
@@ -33,9 +34,9 @@ class AuthForm extends Component{
     console.log(this.props.token)
     var url;
     if(this.state.isLogin)
-      url = 'http://localhost:3000/login'
+      url = 'https://easyloan-api-by-arnab.herokuapp.com/login'
     else  
-      url = 'http://localhost:3000/signup'
+      url = 'https://easyloan-api-by-arnab.herokuapp.com/signup'
 
     fetch(
       url,
@@ -53,15 +54,18 @@ class AuthForm extends Component{
     .then(res => res.json())
     .then((result) => {
       console.log(result)
-      if(result.errors)
-      {
+      if(result.errors){
         console.log(result);
         this.setState({error: 'Authentication failed'})
+      }
+      else if(result.code === 11000){
+        this.setState({error: 'Email aldready registered'})
       }
       else 
       {
         this.setState({error: ''})
         this.assignToken(result.token);
+        this.props.history.push('/loanApply')
       }
     })
     .catch((e) => {
@@ -111,4 +115,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));

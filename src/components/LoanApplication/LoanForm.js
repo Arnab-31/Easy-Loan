@@ -1,5 +1,7 @@
 import React , {Component} from 'react';
-import classes from './ProfileForm.module.css';
+import { connect } from 'react-redux';
+import classes from './LoanForm.module.css';
+import {withRouter} from 'react-router-dom'
 
 class ProfileForm extends Component {
   
@@ -43,7 +45,18 @@ class ProfileForm extends Component {
 
 
   validate = () => {
+    
+   
+    if(this.props.token === ''){
+      this.setState({error: 'You are not logged in'});
+      return false;
+    }
+
     const {name, email, address, contact, amount, start_date, expiry_date, type} = this.state;
+
+    var endDate = new Date(expiry_date);
+    var startDate = new Date(start_date);
+    const months = (endDate.getFullYear() - startDate.getFullYear())*12 + (endDate.getMonth() - startDate.getMonth())
 
     if(name === '' || email === '' || address === '' || contact === '' || amount === '' || start_date === '' || expiry_date === '' || type === ''){
       
@@ -60,7 +73,12 @@ class ProfileForm extends Component {
       this.setState({error: 'Invalid Email id'});
       return false;
     }
+    else if(months < 2){
 
+      this.setState({error: 'Minimum loan duration is 2 months'});
+      return false;
+
+    }
     else{
 
       this.setState({error: ''});
@@ -77,7 +95,7 @@ class ProfileForm extends Component {
     if(this.validate()){
       console.log(name + ' ' + email + ' ' + address + ' ' + contact + ' ' + amount + ' ' + start_date + ' ' + expiry_date + ' ' + type)
       fetch(
-        'http://localhost:3000/loan',
+        'https://easyloan-api-by-arnab.herokuapp.com/loan',
         {
           method: 'POST',
           body: JSON.stringify({
@@ -91,10 +109,26 @@ class ProfileForm extends Component {
             expiry_date: new Date(expiry_date)
           }),
           headers: {
+            'Authorization': 'Bearer '+this.props.token,
             'Content-Type': 'application/json'
           }
         }
       )
+      .then(res => res.json())
+      .then(result => {
+        console.log(result)
+        if(result.code === 11000)
+          this.setState({error: 'Loan amount aldready present in system'});
+        else{
+          this.setState({error: ''});
+          this.props.history.push('/loans')
+        } 
+      })
+      .catch(e => {
+        console.log('error');
+        console.log(e)
+        this.setState({error: 'An error occoured'});
+      })
     }
   }
 
@@ -140,4 +174,10 @@ class ProfileForm extends Component {
   }
 }
 
-export default ProfileForm;
+const mapStateToProps = (state) => {
+  return { token: state.token };
+}
+
+export default withRouter(connect(mapStateToProps)(ProfileForm));
+
+

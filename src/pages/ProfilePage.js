@@ -1,7 +1,7 @@
-import UserProfile from '../components/profile/user-profile';
+import LoanApplication from '../components/LoanApplication/LoanApplication';
 
-const ProfilePage = () => {
-  return <UserProfile />;
+const LoanApplicationPage = () => {
+  return <LoanApplication />;
 };
 
-export default ProfilePage;
+export default LoanApplicationPage;

@@ -53,3 +53,32 @@
   background-color: #c291e2;
   color: #38015c;
 }
+
+
+@media only screen and (max-width: 500px) {
+
+  .header {
+    height: 5.5rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+  .header ul  {
+    margin: 5px;
+    padding-top: 10px;
+  }
+
+  .header button{
+    padding: 0.25rem 1rem;
+    margin-bottom: 10px;
+  }
+
+  .smallElements{
+    padding-top: 10px;
+  }
+
+
+
+}
+

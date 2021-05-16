@@ -14,10 +14,10 @@ const Loan = (props) => {
             </div>
         </div>
         <div className={classes.userDetails}>
-            <p>Applicant name - {props.name}</p>
-            <p>Email - {props.email}</p>
-            <p>Address - {props.email}</p>
-            <p>Contact - {props.contact}</p>
+            <p><b>Applicant name</b> - {props.name}</p>
+            <p><b>Email</b> - {props.email}</p>
+            <p><b>Address</b> - {props.email}</p>
+            <p><b>Contact</b> - {props.contact}</p>
         </div>
     </div>
   );
