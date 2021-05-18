@@ -16,7 +16,7 @@ const Loan = (props) => {
         <div className={classes.userDetails}>
             <p><b>Applicant name</b> - {props.name}</p>
             <p><b>Email</b> - {props.email}</p>
-            <p><b>Address</b> - {props.email}</p>
+            <p><b>Address</b> - {props.address}</p>
             <p><b>Contact</b> - {props.contact}</p>
         </div>
     </div>
